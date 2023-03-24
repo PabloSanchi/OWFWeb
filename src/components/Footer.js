@@ -13,9 +13,16 @@ function Contact() {
 
         <div className='flex flex-col items-center justify-center gap-y-10'>
             
-            <div className='flex flex-row items-center justify-center gap-2'>
-                <p className='max-w-lg md:text-xl'>MetricSIM is a web-based platform that provides a comprehensive overview of simulation data for an offshore wind farm. The platform displays various metrics related to the performance and efficiency of the wind farm, including wind speed, wind direction, swell direction, swell height, and wave height. Users can view the simulation data in real-time and analyze it to identify trends and patterns in the wind farm's performance.</p>
-            </div>
+            {/* <div className='flex flex-row items-center justify-center gap-2'> */}
+                <p className='max-w-sm md:max-w-md lg:max-w-lg text-center text-sm md:text-xl'>
+                  MetricSIM is a web-based platform that provides a comprehensive overview of
+                   simulation data for an offshore wind farm. The platform displays various
+                    metrics related to the performance and efficiency of the wind farm, including 
+                    wind speed, wind direction, swell direction, swell height, and wave height. 
+                    Users can view the simulation data in real-time and analyze it to identify trends 
+                    and patterns in the wind farm's performance.
+                </p>
+            {/* </div> */}
         </div>
 
         <div className='p-10'>

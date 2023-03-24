@@ -10,7 +10,6 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 
 ChartJS.register(
     CategoryScale,
@@ -83,7 +82,7 @@ export const DataDirection = ({ data }) => {
     };
 
     return (
-        <div className='md:px-[30rem]'>
+        <div className='md:px-[30rem] h-sm'>
             <Line options={directionOptions} data={config} />
         </div>
     )
@@ -111,7 +110,7 @@ export const DataHeight = ({ data }) => {
     };
 
     return (
-        <div className='md:px-[30rem]'>
+        <div className='md:px-[30rem] h-sm'>
             <Line options={heightOptions} data={config} />
         </div>
     )
@@ -133,8 +132,9 @@ export const SpeedOptions = ({ data }) => {
     };
 
     return (
-        <div className='md:px-[30rem]'>
-            <Line height='100px' options={speedOptions} data={config} />
+        <div className='md:px-[30rem] h-sm'>
+            <Line  options={speedOptions} data={config} />
+            {/* height='100px' */}
         </div>
     )
 }
