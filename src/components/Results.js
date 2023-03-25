@@ -1,11 +1,12 @@
-import React, { useState, Component } from 'react'
+import React from 'react'
 import { useData } from '../Services/useData'
-import { DataDirection, DataHeight, SpeedOptions } from './CustomChart';
+import { DataDirection, DataHeight, SpeedOptions, EnergyPerOWT } from './CustomChart';
+// import RealTimeChart from './RealTimeChart';
 
 
 
 const Results = () => {
-    const { data, reset } = useData();
+    const { data, energy, reset } = useData();
 
     return (
         <div className='flex flex-col bg-gray-100'>
@@ -16,12 +17,10 @@ const Results = () => {
             </div>
             {data && (
                 <div className='flex flex-col md:px-10 lg:px-xl'>
-                    {/* <pre>Data Snap: {JSON.stringify(data, 2, 4)}</pre> */}
-                    {/* <div className='mx-auto flex flex-col md:flex-row'> */}
-                        <DataDirection data={data} />
-                        <DataHeight data={data} />
-                    {/* </div> */}
+                    <DataDirection data={data} />
+                    <DataHeight data={data} />
                     <SpeedOptions data={data} />
+                    <EnergyPerOWT data={data} energy={energy}/>
                 </div>
             )}
         </div>

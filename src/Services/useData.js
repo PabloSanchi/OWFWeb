@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
 import { rtdb as db, ref, onValue } from '../firebase'
+import { calcCP } from './calcCp'
 
 const postId = '-NQVAkSX7VP9BOACVhM2'
 const starCountRef = ref(db, `weather/${postId}`)
+const rotorRadius = [270, 260, 200, 220]
+const P = 1.225
+const calcA = (D) => {
+  return 0.5 * Math.PI * Math.pow(D, 2)
+}
 
 export function useData() {
 
@@ -14,7 +20,14 @@ export function useData() {
     wind_direction: [],
     wind_speed: []
   })
-  // const [loading, setLoading] = useState(true)
+
+  const [energy, setEnergy] = useState({
+    semi_submersible_1: [],
+    semi_submersible_2: [],
+    tension_leg: [],
+    mono_pile: []
+  })
+
   const reset = () => {
     setData({
       swell_direction: [],
@@ -23,6 +36,18 @@ export function useData() {
       wind_direction: [],
       wind_speed: []
     })
+  }
+
+  // const calcCurrentPower = (A, ws, Cp) => {
+  //   const watts = 0.5 * P * A * Math.pow(ws, 3) * Cp;
+  //   // return watts
+  //   // console.log('watts', watts)
+  //   return watts / 1e6;
+  // }
+
+  const calcCurrentPower = (A, ws, Cp) => {
+    const watts = 0.5 * A * ws * ws * ws * Cp;
+    return watts / 3e6;
   }
 
   useEffect(() => {
@@ -36,10 +61,19 @@ export function useData() {
         wind_direction: [...prevData.wind_direction, newData.wind_direction],
         wind_speed: [...prevData.wind_speed, newData.wind_speed],
       }));
+
+      console.log(calcCP(P, rotorRadius[0], newData.wind_speed))
+
+      setEnergy((prevEnergy) => ({
+        semi_submersible_1: [...prevEnergy.semi_submersible_1, calcCurrentPower(calcA(rotorRadius[0]), newData.wind_speed, calcCP(P, rotorRadius[0], newData.wind_speed))],
+        semi_submersible_2: [...prevEnergy.semi_submersible_2, calcCurrentPower(calcA(rotorRadius[1]), newData.wind_speed, calcCP(P, rotorRadius[1], newData.wind_speed))],
+        tension_leg: [...prevEnergy.tension_leg, calcCurrentPower(calcA(rotorRadius[2]), newData.wind_speed, calcCP(P, rotorRadius[2], newData.wind_speed))],
+        mono_pile: [...prevEnergy.mono_pile, calcCurrentPower(calcA(rotorRadius[3]), newData.wind_speed, calcCP(P, rotorRadius[3], newData.wind_speed))],
+      }))
     })
   }, [])
 
 
 
-  return { data, reset }
+  return { data, energy, reset }
 }

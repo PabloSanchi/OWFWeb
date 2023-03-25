@@ -22,18 +22,14 @@ const Header = () => {
                 DOCS
             </motion.button>
 
-            <motion.div 
+            <motion.a 
             initial={{x: 500, opacity: 0, scale: 0.5}}
             animate={{x: 0, opacity: 1, scale: 1}}
             transition={{duration: 0.5}}
+            href='#repo' rel='noreferrer' target='_blank'
             className='hidden md:flex space-x-4  items-center'>
-                <a href='#repo' rel='noreferrer' target='_blank'>
-                    <GitHubIcon />
-                </a>
-                {/* <a href='#repo' rel='noreferrer' target='_blank'>
-                    <PictureAsPdfIcon />
-                </a> */}
-            </motion.div>
+                <GitHubIcon />
+            </motion.a>
 
         </div>
     </header>
