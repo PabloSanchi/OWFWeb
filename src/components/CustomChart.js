@@ -47,6 +47,7 @@ const heightOptions = {
 	},
 };
 
+
 const speedOptions = {
 	responsive: true,
 	plugins: {
@@ -82,7 +83,13 @@ export const DataDirection = ({ data }) => {
 	};
 
 	return (
-		<Line style={{paddingInline: '2em'}} width="100%" height="100%" options={directionOptions} data={config} />
+		<Line
+			style={{ paddingInline: "2em" }}
+			width="60%"
+			height="30%"
+			options={directionOptions}
+			data={config}
+		/>
 		// <div className='w-full md:px-[10rem] h-[30rem] md:h-[30rem]'>
 		// </div>
 	);
@@ -110,7 +117,13 @@ export const DataHeight = ({ data }) => {
 	};
 
 	return (
-		<Line style={{paddingInline: '2em'}} width="100%" height='100%' options={heightOptions} data={config} />
+		<Line
+			style={{ paddingInline: "2em" }}
+			width="60%"
+			height="30%"
+			options={heightOptions}
+			data={config}
+		/>
 		// <div className='md:px-[10rem] md:h-[30rem]'>
 		// </div>
 	);
@@ -132,9 +145,14 @@ export const SpeedOptions = ({ data }) => {
 	};
 
 	return (
-		<Line style={{paddingInline: '2em'}} width="100%" height="100%" options={speedOptions} data={config} />
+		<Line
+			style={{ paddingInline: "2em" }}
+			width="60%"
+			height="30%"
+			options={speedOptions}
+			data={config}
+		/>
 		// <div className='md:px-[10rem] md:h-[30rem]'>
 		// </div>
-
 	);
 };
