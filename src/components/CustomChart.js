@@ -82,9 +82,9 @@ export const DataDirection = ({ data }) => {
     };
 
     return (
-        <div className='md:px-[30rem] h-sm'>
-            <Line options={directionOptions} data={config} />
-        </div>
+        <Line width='100%' height='50%' options={directionOptions} data={config} />
+        // <div className='w-full md:px-[10rem] h-[30rem] md:h-[30rem]'>
+        // </div>
     )
 }
 
@@ -110,9 +110,9 @@ export const DataHeight = ({ data }) => {
     };
 
     return (
-        <div className='md:px-[30rem] h-sm'>
-            <Line options={heightOptions} data={config} />
-        </div>
+        <Line width='100%' height='70%' options={heightOptions} data={config} />
+        // <div className='md:px-[10rem] md:h-[30rem]'>
+        // </div>
     )
 }
 
@@ -132,9 +132,9 @@ export const SpeedOptions = ({ data }) => {
     };
 
     return (
-        <div className='md:px-[30rem] h-sm'>
-            <Line  options={speedOptions} data={config} />
-            {/* height='100px' */}
-        </div>
+            <Line width='100%' height='50%' options={speedOptions} data={config} />
+        // <div className='md:px-[10rem] md:h-[30rem]'>
+            
+        // </div>
     )
 }
