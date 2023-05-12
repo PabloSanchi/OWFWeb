@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { LineChart, Card } from "@tremor/react";
+
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -10,6 +12,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
 
 ChartJS.register(
 	CategoryScale,
@@ -74,39 +77,125 @@ const energyOptions = {
 	},
 };
 
-export const DataDirection = ({ data }) => {
-	const labels = Array(data.wind_direction.length).fill('');
 
-	const config = {
-		labels,
-		datasets: [
-			{
-				label: 'wind direction',
-				data: data.wind_direction,
-				borderColor: 'rgb(255, 99, 132)',
-				backgroundColor: 'rgba(255, 99, 132, 0.5)',
-			},
-			{
-				label: 'swell direction',
-				data: data.swell_direction,
-				borderColor: 'rgb(53, 162, 235)',
-				backgroundColor: 'rgba(53, 162, 235, 0.5)',
-			},
-		],
-	};
+// export const DataDirection = ({ data }) => {
+
+// 	const [arr, setArr] = useState([]);
+// 	const [flag, setFlag] = useState(0);
+
+// 	useEffect(() => {
+// 		const newArr = [...arr, { x: new Date().getTime(), 'value': Math.random() * 10 }];
+// 		setArr(newArr);
+
+// 		console.log(arr);
+
+// 		setTimeout(() => {
+// 			setFlag(flag + 1);
+// 		}, 2000);
+
+// 	}, [flag]);
+
+// 	// const chartData = data.wind_direction.map((value, index) => {
+// 	// 	return { x: new Date().getTime(), y: value }
+// 	// })
+
+// 	const dataFormatter = (number) => number.toString() + 'º'
+
+// 	return (
+// 		<Card className='m-2'>
+// 			<p>Wind Direction Data</p>
+// 			<LineChart
+// 				data={arr}
+// 				index="x"
+// 				categories={['Wind Direction']}
+// 				colors={['blue']}
+// 				valueFormatter={dataFormatter}
+// 				yAxisWidth={100}
+// 			/>
+// 		</Card>
+// 	);
+// }
+
+export const DataDirection = ({ data }) => {
+
+	const [arr, setArr] = useState([]);
+	const [flag, setFlag] = useState(0);
+
+	useEffect(() => {
+		const newArr = [...arr, { x: '', 'Export Growth Rate': Math.random() * 360 }];
+		setArr(newArr);
+
+		console.log(arr);
+
+		setTimeout(() => {
+			setFlag(flag + 1);
+		}, 2000);
+
+		if(flag % 10 === 0) {
+			// pop first element of arr
+			const newArr = [...arr];
+			newArr.shift();
+			setArr(newArr);
+		}
+		
+
+	}, [flag]);
+
+	const dataFormatter = (number) =>
+		`${Intl.NumberFormat("us").format(number).toString()}º`;
+
 
 	return (
-		<Line
-			style={{ paddingInline: '2em' }}
-			width='60%'
-			height='30%'
-			options={directionOptions}
-			data={config}
-		/>
-		// <div className='w-full md:px-[10rem] h-[30rem] md:h-[30rem]'>
-		// </div>
-	);
-};
+		<Card className='mt-5'>
+			<LineChart
+				data={arr}
+				index="x"
+				categories={['Export Growth Rate']}
+				colors={['emerald']}
+				valueFormatter={dataFormatter}
+				yAxisWidth={30}
+				showAnimation={false}
+				startEndOnly={false}
+			/>
+		</Card>
+	)
+}
+
+
+
+// export const DataDirection = ({ data }) => {
+// 	const labels = Array(data.wind_direction.length).fill('');
+
+// 	const config = {
+// 		labels,
+// 		datasets: [
+// 			{
+// 				label: 'wind direction',
+// 				data: data.wind_direction,
+// 				borderColor: 'rgb(255, 99, 132)',
+// 				backgroundColor: 'rgba(255, 99, 132, 0.5)',
+// 			},
+// 			{
+// 				label: 'swell direction',
+// 				data: data.swell_direction,
+// 				borderColor: 'rgb(53, 162, 235)',
+// 				backgroundColor: 'rgba(53, 162, 235, 0.5)',
+// 			},
+// 		],
+// 	};
+
+// 	return (
+// 		<Line
+// 			style={{ paddingInline: '2em' }}
+// 			width='60%'
+// 			height='30%'
+// 			options={directionOptions}
+// 			data={config}
+// 		/>
+// 		// <div className='w-full md:px-[10rem] h-[30rem] md:h-[30rem]'>
+// 		// </div>
+// 	);
+// };
 
 export const DataHeight = ({ data }) => {
 	const labels = Array(data.wave_height.length).fill('');
@@ -200,7 +289,7 @@ export const EnergyPerOWT = ({ energy }) => {
 				borderColor: 'rgb(70, 106, 68)',
 				backgroundColor: 'rgba(70, 106, 68, 0.5)',
 			},
-		],	
+		],
 	};
 
 	return (
