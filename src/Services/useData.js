@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useDeferredValue } from 'react'
 import { rtdb as db, ref, onValue } from '../firebase'
 import { calcCP } from './calcCp'
 
@@ -50,7 +50,23 @@ export function useData() {
     return watts / 3e6;
   }
 
+  const jsonShifter = (state) => {
+    const json = state;
+
+    console.log('Data length', data.swell_direction.length);
+    if(data.swell_direction.length < 10 ) return json
+    
+    // shift every array in json
+    for(let key of Object.keys(json)) {
+      json[key].shift()
+    }
+
+    return json
+
+  }
+
   useEffect(() => {
+
     onValue(starCountRef, (snapshot) => {
       const newData = JSON.parse(JSON.stringify(snapshot.val()))
       console.log(newData)
@@ -70,10 +86,15 @@ export function useData() {
         tension_leg: [...prevEnergy.tension_leg, calcCurrentPower(calcA(rotorRadius[2]), newData.wind_speed, calcCP(P, rotorRadius[2], newData.wind_speed))],
         mono_pile: [...prevEnergy.mono_pile, calcCurrentPower(calcA(rotorRadius[3]), newData.wind_speed, calcCP(P, rotorRadius[3], newData.wind_speed))],
       }))
+
     })
+
   }, [])
 
-
+  useEffect(() => {
+    setData(jsonShifter(data));
+    setEnergy(jsonShifter(energy));
+  }, [data])
 
   return { data, energy, reset }
 }
