@@ -26,7 +26,7 @@ const Header = () => {
             initial={{x: 500, opacity: 0, scale: 0.5}}
             animate={{x: 0, opacity: 1, scale: 1}}
             transition={{duration: 0.5}}
-            href='#repo' rel='noreferrer' target='_blank'
+            href='https://github.com/PabloSanchi/OWFWeb/tree/feature/tremor' rel='noreferrer' target='_blank'
             className='hidden md:flex space-x-4  items-center'>
                 <GitHubIcon />
             </motion.a>
