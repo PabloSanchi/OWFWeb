@@ -93,8 +93,11 @@ export function useData() {
 
   useEffect(() => {
     setData(jsonShifter(data));
-    setEnergy(jsonShifter(energy));
   }, [data])
+
+  // useEffect(() => {
+  //   setEnergy(jsonShifter(energy));
+  // }, [energy])
 
   return { data, energy, reset }
 }

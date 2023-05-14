@@ -127,7 +127,7 @@ export const EnergyPerOWT = ({ energy }) => {
 	const [showMP, setShowMP] = useState(true);
 
 	return (
-		<Card className="mt-5">
+		<Card className="my-5">
 			<div className="flex space-x-5 items-center">
 				<Title>Engergy per OWF</Title>
 				<div className="hidden md:flex space-x-5">
