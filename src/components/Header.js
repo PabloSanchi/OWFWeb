@@ -2,6 +2,8 @@ import React from 'react'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { motion } from "framer-motion"
 
+import docs from '../Data/doc.pdf';
+
 const Header = () => {
   return (
     <header className='select-none shadow-lg p-5'>
@@ -18,6 +20,7 @@ const Header = () => {
             initial={{y: -50, opacity: 0, scale: 0.5}}
             animate={{y: 0, opacity: 1, scale: 1}}
             transition={{duration: 0.5}}
+            onClick={() => window.open(docs)}
             className='text-lg lg:text-xl font-light border-2 border-gray-500 rounded-md px-4 py-2 hover:bg-gray-500 hover:text-white'>
                 DOCS
             </motion.button>
